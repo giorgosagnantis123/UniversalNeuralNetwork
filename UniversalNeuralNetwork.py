@@ -10,7 +10,7 @@ import random
 class QuantumWeightSuperposition:
    def __init__(self, initial_weight, max_candidates):
      """Initializes the quantum weight pool, tracking potential candidate weights,
-     their imagianry parts (uncertainty/volatility, and their utiltiy scores)"""
+     their imaginary parts (uncertainty/volatility), and their utiltiy scores"""
 
      self.candidates=[initial_weight]
      self.imaginary_parts=[np.random.uniform(0.01, 0.05)]
@@ -24,7 +24,7 @@ class QuantumWeightSuperposition:
 
    def select_weight_entangled(self, current_probability_residue, annealing_temp=1.0):
      """Selects a weight from the superposition based on a probabiity distribution derived
-     from the weight magnitudes, uncertainties, and utilities, modulatedby temperature"""
+     from the weight magnitudes, uncertainties, and utilities, modulated by temperature"""
 
      w_sq= np.array(self.candidates)**2
      r_sq= np.array(self.imaginary_parts)**2
@@ -45,7 +45,7 @@ class QuantumWeightSuperposition:
      return self.last_selected_weight,probabilities[idx]
 
    def update_weight_superposition(self, ideal_weight):
-     """Updates te pool of candidate weights by either adding a newly discovered ideal weight
+     """Updates the pool of candidate weights by either adding a newly discovered ideal weight
      (if limits allow) or adjusting the imaginary parts and utilities of existing candidates"""
 
      candidates_arr=np.array(self.candidates)
@@ -184,7 +184,7 @@ class NovelNetwork:
 
   def _initialize_network_structure(self):
     """Builds the neural network structure, dynamically sizing layers and
-    instantiating QuantumWeightSuperposiiton objects for each synaptic connection"""
+    instantiating QuantumWeightSuperposition objects for each synaptic connection"""
 
     current_size= self.input_dimension
 
@@ -216,7 +216,7 @@ class NovelNetwork:
 
   def forward(self, input_vector):
       """Performs a forward pass through the network, selecting entangled weights,
-      aggregating activations, and applying max pooling  alongside a Leaky Relu-Like activation"""
+      aggregating activations, and applying max pooling alongside a Leaky Relu-Like activation"""
 
       activations={'layer_activations':[np.array(input_vector).flatten()], 'pooled_values':[], 'pooled_indices':[]}
       current_layer=activations['layer_activations'][0]
@@ -383,7 +383,7 @@ class NovelNetwork:
           desired_output=updated_output
 
   def refresh_all_quantum_pools(self):
-       """Triggers the candidate pool refresh mechanismacross all quantum connections
+       """Triggers the candidate pool refresh mechanism across all quantum connections
        in the network using an adaptive mutation scale based on recent loss"""
 
        adaptive_mutation=0.03 +(0.05* (1.0- np.tanh(self.moving_avg_loss)))
